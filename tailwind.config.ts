@@ -9,11 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        brand: {
+          navy: '#1A1A2E',
+          teal: '#00D8A4',
+          surface: '#F8F7F4',
+        },
+      },
+      fontFamily: {
+        display: ['Sora', 'sans-serif'],
+        body: ['DM Sans', 'sans-serif'],
       },
     },
   },
   plugins: [],
 };
+
 export default config;
