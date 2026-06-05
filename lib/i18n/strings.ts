@@ -70,6 +70,79 @@ export const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.tagline': 'Simple finances for people who build things.',
     'footer.copyright': '© 2024 Ledgr Technologies Inc. All rights reserved.',
+
+    // App — nav
+    'app.nav.dashboard': 'Dashboard',
+    'app.nav.invoices': 'Invoices',
+    'app.nav.expenses': 'Expenses',
+    'app.nav.settings': 'Settings',
+    'app.nav.logout': 'Log out',
+
+    // App — login
+    'app.login.heading': 'Welcome back',
+    'app.login.subheading': 'Sign in to your Ledgr account',
+    'app.login.cta': 'Log in',
+    'app.login.helper': 'Use demo@ledgr.app / demo1234 to sign in',
+    'app.login.error': 'Please enter your email and password.',
+
+    // App — dashboard
+    'app.dashboard.greeting': 'Good morning',
+    'app.dashboard.subtitle': "Here's your financial snapshot for June 2026",
+    'app.dashboard.stats.invoiced': 'Total Invoiced',
+    'app.dashboard.stats.collected': 'Collected',
+    'app.dashboard.stats.outstanding': 'Outstanding',
+    'app.dashboard.stats.avgTime': 'Avg. Payment Time',
+    'app.dashboard.recentInvoices': 'Recent Invoices',
+    'app.dashboard.viewAll': 'View all',
+    'app.dashboard.newInvoice': 'New Invoice',
+    'app.dashboard.logExpense': 'Log Expense',
+
+    // App — invoices
+    'app.invoices.heading': 'Invoices',
+    'app.invoices.newButton': 'New Invoice',
+    'app.invoices.filterAll': 'All',
+    'app.invoices.filterPaid': 'Paid',
+    'app.invoices.filterPending': 'Pending',
+    'app.invoices.filterOverdue': 'Overdue',
+    'app.invoices.modal.heading': 'New Invoice',
+    'app.invoices.modal.client': 'Client name',
+    'app.invoices.modal.description': 'Description',
+    'app.invoices.modal.amount': 'Amount',
+    'app.invoices.modal.dueDate': 'Due date',
+    'app.invoices.modal.send': 'Send Invoice',
+    'app.invoices.modal.cancel': 'Cancel',
+    'app.invoices.toast': 'Invoice sent!',
+
+    // App — expenses
+    'app.expenses.heading': 'Expenses',
+    'app.expenses.addButton': 'Add Expense',
+    'app.expenses.thisMonth': 'This Month',
+    'app.expenses.lastMonth': 'Last Month',
+    'app.expenses.taxDeductible': 'Tax Deductible',
+    'app.expenses.modal.heading': 'Add Expense',
+    'app.expenses.modal.description': 'Description',
+    'app.expenses.modal.category': 'Category',
+    'app.expenses.modal.amount': 'Amount',
+    'app.expenses.modal.date': 'Date',
+    'app.expenses.modal.save': 'Save Expense',
+    'app.expenses.toast': 'Expense saved!',
+
+    // App — settings
+    'app.settings.heading': 'Settings',
+    'app.settings.profile': 'Profile',
+    'app.settings.firstName': 'First name',
+    'app.settings.lastName': 'Last name',
+    'app.settings.email': 'Email',
+    'app.settings.businessName': 'Business name',
+    'app.settings.saveChanges': 'Save changes',
+    'app.settings.toast': 'Profile updated',
+    'app.settings.preferences': 'Preferences',
+    'app.settings.language': 'Language',
+    'app.settings.languageDesc': 'Interface language',
+    'app.settings.currency': 'Currency display',
+    'app.settings.currencyDesc': 'Used for invoice amounts',
+    'app.settings.notifications': 'Email notifications',
+    'app.settings.notificationsDesc': 'Receive payment reminders',
   },
 
   es: {
@@ -142,5 +215,78 @@ export const translations: Record<Language, Record<string, string>> = {
     'footer.tagline': 'Finanzas simples para quienes crean cosas.',
     'footer.copyright':
       '© 2024 Ledgr Technologies Inc. Todos los derechos reservados.',
+
+    // App — nav
+    'app.nav.dashboard': 'Panel',
+    'app.nav.invoices': 'Facturas',
+    'app.nav.expenses': 'Gastos',
+    'app.nav.settings': 'Configuración',
+    'app.nav.logout': 'Cerrar sesión',
+
+    // App — login
+    'app.login.heading': 'Bienvenido de vuelta',
+    'app.login.subheading': 'Inicia sesión en tu cuenta de Ledgr',
+    'app.login.cta': 'Iniciar sesión',
+    'app.login.helper': 'Usa demo@ledgr.app / demo1234 para iniciar sesión',
+    'app.login.error': 'Por favor ingresa tu correo y contraseña.',
+
+    // App — dashboard
+    'app.dashboard.greeting': 'Buen día',
+    'app.dashboard.subtitle': 'Tu resumen financiero de junio de 2026',
+    'app.dashboard.stats.invoiced': 'Total facturado',
+    'app.dashboard.stats.collected': 'Cobrado',
+    'app.dashboard.stats.outstanding': 'Pendiente',
+    'app.dashboard.stats.avgTime': 'Tiempo promedio de pago',
+    'app.dashboard.recentInvoices': 'Facturas recientes',
+    'app.dashboard.viewAll': 'Ver todo',
+    'app.dashboard.newInvoice': 'Nueva factura',
+    'app.dashboard.logExpense': 'Registrar gasto',
+
+    // App — invoices
+    'app.invoices.heading': 'Facturas',
+    'app.invoices.newButton': 'Nueva factura',
+    'app.invoices.filterAll': 'Todas',
+    'app.invoices.filterPaid': 'Pagadas',
+    'app.invoices.filterPending': 'Pendientes',
+    'app.invoices.filterOverdue': 'Vencidas',
+    'app.invoices.modal.heading': 'Nueva factura',
+    'app.invoices.modal.client': 'Nombre del cliente',
+    'app.invoices.modal.description': 'Descripción',
+    'app.invoices.modal.amount': 'Monto',
+    'app.invoices.modal.dueDate': 'Fecha de vencimiento',
+    'app.invoices.modal.send': 'Enviar factura',
+    'app.invoices.modal.cancel': 'Cancelar',
+    'app.invoices.toast': '¡Factura enviada!',
+
+    // App — expenses
+    'app.expenses.heading': 'Gastos',
+    'app.expenses.addButton': 'Agregar gasto',
+    'app.expenses.thisMonth': 'Este mes',
+    'app.expenses.lastMonth': 'Mes anterior',
+    'app.expenses.taxDeductible': 'Deducible de impuestos',
+    'app.expenses.modal.heading': 'Agregar gasto',
+    'app.expenses.modal.description': 'Descripción',
+    'app.expenses.modal.category': 'Categoría',
+    'app.expenses.modal.amount': 'Monto',
+    'app.expenses.modal.date': 'Fecha',
+    'app.expenses.modal.save': 'Guardar gasto',
+    'app.expenses.toast': '¡Gasto guardado!',
+
+    // App — settings
+    'app.settings.heading': 'Configuración',
+    'app.settings.profile': 'Perfil',
+    'app.settings.firstName': 'Nombre',
+    'app.settings.lastName': 'Apellido',
+    'app.settings.email': 'Correo electrónico',
+    'app.settings.businessName': 'Nombre del negocio',
+    'app.settings.saveChanges': 'Guardar cambios',
+    'app.settings.toast': 'Perfil actualizado',
+    'app.settings.preferences': 'Preferencias',
+    'app.settings.language': 'Idioma',
+    'app.settings.languageDesc': 'Idioma de la interfaz',
+    'app.settings.currency': 'Moneda',
+    'app.settings.currencyDesc': 'Usada para montos de facturas',
+    'app.settings.notifications': 'Notificaciones por correo',
+    'app.settings.notificationsDesc': 'Recibir recordatorios de pago',
   },
 };
