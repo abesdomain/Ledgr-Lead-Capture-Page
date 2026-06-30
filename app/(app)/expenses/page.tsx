@@ -2,45 +2,45 @@
 
 import { useState, useEffect } from 'react';
 
-type Category = 'Software' | 'Meals' | 'Office' | 'Equipment' | 'Travel' | 'Other';
+type PatternType = 'Clarity' | 'Signal' | 'Authority' | 'Timing' | 'Visibility' | 'Other';
 
-const CATEGORY_STYLES: Record<Category, string> = {
-  Software:  'bg-blue-100 text-blue-700',
-  Meals:     'bg-orange-100 text-orange-700',
-  Office:    'bg-purple-100 text-purple-700',
-  Equipment: 'bg-teal-100 text-teal-700',
-  Travel:    'bg-yellow-100 text-yellow-700',
-  Other:     'bg-gray-100 text-gray-700',
+const TYPE_STYLES: Record<PatternType, string> = {
+  Clarity:    'bg-secondary/20 text-secondary',
+  Signal:     'bg-accent/20 text-accent',
+  Authority:  'bg-muted/20 text-muted',
+  Timing:     'bg-border/60 text-muted',
+  Visibility: 'bg-secondary/10 text-secondary',
+  Other:      'bg-border/40 text-muted',
 };
 
-const EXPENSES: { date: string; description: string; category: Category; amount: string }[] = [
-  { date: 'Jun 3',  description: 'Adobe Creative Cloud',      category: 'Software',  amount: '$54.99' },
-  { date: 'Jun 1',  description: 'Client lunch — Torres',     category: 'Meals',     amount: '$87.50' },
-  { date: 'May 29', description: 'Notion Pro',                category: 'Software',  amount: '$16.00' },
-  { date: 'May 27', description: 'Home office supplies',      category: 'Office',    amount: '$134.00' },
-  { date: 'May 24', description: 'Google Workspace',          category: 'Software',  amount: '$12.00' },
-  { date: 'May 20', description: 'Zoom Pro',                  category: 'Software',  amount: '$15.99' },
-  { date: 'May 18', description: 'Client dinner — Vega',      category: 'Meals',     amount: '$212.00' },
-  { date: 'May 15', description: 'External hard drive',       category: 'Equipment', amount: '$89.00' },
+const PATTERNS: { date: string; observation: string; type: PatternType; gapScore: string }[] = [
+  { date: 'Jun 3',  observation: 'Deferred to junior colleague in leadership review',   type: 'Authority',   gapScore: '8'  },
+  { date: 'Jun 1',  observation: 'Paused before sharing insight in team call',          type: 'Timing',      gapScore: '6'  },
+  { date: 'May 29', observation: 'Qualified strong position before stating it',         type: 'Clarity',     gapScore: '5'  },
+  { date: 'May 27', observation: 'Spoke clearly in 1:1; stayed silent in group',        type: 'Signal',      gapScore: '7'  },
+  { date: 'May 24', observation: 'Accurate diagnosis given only after being prompted',  type: 'Visibility',  gapScore: '9'  },
+  { date: 'May 20', observation: 'Rewrote confident email to soften tone',              type: 'Authority',   gapScore: '7'  },
+  { date: 'May 18', observation: 'Withheld strategy recommendation in board prep',      type: 'Timing',      gapScore: '8'  },
+  { date: 'May 15', observation: 'Named the pattern in reflection; not in the meeting', type: 'Signal',      gapScore: '6'  },
 ];
 
 const SUMMARY = [
-  { label: 'This Month',     amount: '$1,840' },
-  { label: 'Last Month',     amount: '$2,310' },
-  { label: 'Tax Deductible', amount: '$1,560' },
+  { label: 'Clarity Avg.',  value: '72' },
+  { label: 'Signal Avg.',   value: '48' },
+  { label: 'Gap Avg.',      value: '24' },
 ];
 
-const CATEGORIES: Category[] = ['Software', 'Meals', 'Office', 'Equipment', 'Travel', 'Other'];
+const PATTERN_TYPES: PatternType[] = ['Clarity', 'Signal', 'Authority', 'Timing', 'Visibility', 'Other'];
 
-const INPUT_CLS = 'w-full border border-gray-200 rounded-xl px-4 py-3 text-brand-navy focus:outline-none focus:border-brand-teal';
+const INPUT_CLS = 'w-full border border-border bg-bg rounded-lg px-4 py-3 text-text focus:outline-none focus:border-accent font-sans';
 
-export default function ExpensesPage() {
+export default function PatternLogPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [toast, setToast] = useState(false);
 
-  const [desc, setDesc] = useState('');
-  const [category, setCategory] = useState<Category>('Software');
-  const [amount, setAmount] = useState('');
+  const [observation, setObservation] = useState('');
+  const [type, setType] = useState<PatternType>('Clarity');
+  const [gapScore, setGapScore] = useState('');
   const [date, setDate] = useState('');
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function ExpensesPage() {
 
   function handleSave() {
     setModalOpen(false);
-    setDesc(''); setCategory('Software'); setAmount(''); setDate('');
+    setObservation(''); setType('Clarity'); setGapScore(''); setDate('');
     setToast(true);
   }
 
@@ -59,48 +59,48 @@ export default function ExpensesPage() {
     <div className="page-fade-in max-w-6xl mx-auto px-6 py-8">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="font-display text-2xl font-bold text-brand-navy">Expenses</h1>
+        <h1 className="font-sans text-2xl font-bold text-text">Pattern Log</h1>
         <button
           onClick={() => setModalOpen(true)}
-          className="bg-brand-teal text-white rounded-full px-5 py-2.5 font-semibold hover:bg-teal-400 transition-colors"
+          className="bg-accent text-bg rounded-lg px-5 py-2.5 font-sans font-semibold hover:bg-accent/90 transition-colors"
         >
-          Add Expense
+          Log Pattern
         </button>
       </div>
 
       {/* Summary strip */}
       <div className="grid grid-cols-3 gap-4 mt-6">
-        {SUMMARY.map(({ label, amount }) => (
-          <div key={label} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
-            <p className="font-display text-2xl font-bold text-brand-navy">{amount}</p>
-            <p className="text-gray-500 text-sm mt-1">{label}</p>
+        {SUMMARY.map(({ label, value }) => (
+          <div key={label} className="bg-card rounded-xl p-5 border border-border">
+            <p className="font-mono text-2xl font-bold text-accent">{value}</p>
+            <p className="font-sans text-muted text-sm mt-1">{label}</p>
           </div>
         ))}
       </div>
 
       {/* Desktop table */}
-      <div className="hidden md:block mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="hidden md:block mt-6 bg-card rounded-xl border border-border overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-50">
-              {['Date', 'Description', 'Category', 'Amount'].map(col => (
-                <th key={col} className="text-left px-6 py-3 text-gray-500 text-xs uppercase tracking-wide font-medium">
+            <tr className="border-b border-border">
+              {['Date', 'Observation', 'Pattern Type', 'Gap Score'].map(col => (
+                <th key={col} className="text-left px-6 py-3 font-sans text-muted text-xs uppercase tracking-wide font-medium">
                   {col}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {EXPENSES.map(({ date, description, category, amount }) => (
-              <tr key={`${date}-${description}`} className="border-t border-gray-50 hover:bg-gray-50/50 transition-colors">
-                <td className="px-6 py-4 text-sm text-gray-500">{date}</td>
-                <td className="px-6 py-4 text-sm text-gray-700">{description}</td>
+            {PATTERNS.map(({ date, observation, type, gapScore }) => (
+              <tr key={`${date}-${observation}`} className="border-t border-border/50 hover:bg-border/20 transition-colors">
+                <td className="px-6 py-4 font-sans text-sm text-muted whitespace-nowrap">{date}</td>
+                <td className="px-6 py-4 font-sans text-sm text-text">{observation}</td>
                 <td className="px-6 py-4">
-                  <span className={`rounded-full px-3 py-1 text-xs font-medium ${CATEGORY_STYLES[category]}`}>
-                    {category}
+                  <span className={`rounded-full px-3 py-1 text-xs font-medium font-sans ${TYPE_STYLES[type]}`}>
+                    {type}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm font-medium text-brand-navy">{amount}</td>
+                <td className="px-6 py-4 font-mono text-sm font-medium text-accent">{gapScore}</td>
               </tr>
             ))}
           </tbody>
@@ -108,18 +108,18 @@ export default function ExpensesPage() {
       </div>
 
       {/* Mobile card list */}
-      <div className="md:hidden mt-6 flex flex-col">
-        {EXPENSES.map(({ date, description, category, amount }) => (
-          <div key={`${date}-${description}`} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-3">
+      <div className="md:hidden mt-6 flex flex-col gap-3">
+        {PATTERNS.map(({ date, observation, type, gapScore }) => (
+          <div key={`${date}-${observation}`} className="bg-card rounded-xl p-4 border border-border">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-semibold text-brand-navy">{description}</p>
-                <p className="text-gray-400 text-xs mt-0.5">{date}</p>
+              <div className="flex-1 pr-4">
+                <p className="font-sans text-sm text-text">{observation}</p>
+                <p className="font-sans text-muted text-xs mt-0.5">{date}</p>
               </div>
-              <div className="text-right">
-                <p className="text-sm font-semibold text-brand-navy">{amount}</p>
-                <span className={`inline-block mt-1 rounded-full px-3 py-0.5 text-xs font-medium ${CATEGORY_STYLES[category]}`}>
-                  {category}
+              <div className="text-right flex-shrink-0">
+                <p className="font-mono text-sm font-semibold text-accent">{gapScore}</p>
+                <span className={`inline-block mt-1 rounded-full px-3 py-0.5 text-xs font-medium font-sans ${TYPE_STYLES[type]}`}>
+                  {type}
                 </span>
               </div>
             </div>
@@ -127,14 +127,14 @@ export default function ExpensesPage() {
         ))}
       </div>
 
-      {/* Add Expense modal */}
+      {/* Log Pattern modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 relative">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center">
+          <div className="bg-card rounded-2xl border border-border p-8 max-w-md w-full mx-4 relative">
             <button
               onClick={() => setModalOpen(false)}
               aria-label="Close"
-              className="absolute top-4 right-4 text-gray-400 hover:text-brand-navy transition-colors"
+              className="absolute top-4 right-4 text-muted hover:text-text transition-colors"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <line x1="4" y1="4" x2="16" y2="16" />
@@ -142,47 +142,44 @@ export default function ExpensesPage() {
               </svg>
             </button>
 
-            <h2 className="font-display font-bold text-xl text-brand-navy">Add Expense</h2>
+            <h2 className="font-sans font-bold text-xl text-text">Log Pattern</h2>
 
             <div className="mt-6 flex flex-col gap-4">
               <div>
-                <label className="block text-sm font-medium text-brand-navy mb-1">Description</label>
-                <input type="text" value={desc} onChange={e => setDesc(e.target.value)} className={INPUT_CLS} />
+                <label className="block text-sm font-medium text-muted mb-1 font-sans">Observation</label>
+                <input type="text" value={observation} onChange={e => setObservation(e.target.value)} className={INPUT_CLS} />
               </div>
               <div>
-                <label className="block text-sm font-medium text-brand-navy mb-1">Category</label>
+                <label className="block text-sm font-medium text-muted mb-1 font-sans">Pattern type</label>
                 <select
-                  value={category}
-                  onChange={e => setCategory(e.target.value as Category)}
+                  value={type}
+                  onChange={e => setType(e.target.value as PatternType)}
                   className={INPUT_CLS}
                 >
-                  {CATEGORIES.map(c => (
-                    <option key={c} value={c}>{c}</option>
+                  {PATTERN_TYPES.map(t => (
+                    <option key={t} value={t}>{t}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-brand-navy mb-1">Amount</label>
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">$</span>
-                  <input type="number" value={amount} onChange={e => setAmount(e.target.value)} className={`${INPUT_CLS} pl-8`} />
-                </div>
+                <label className="block text-sm font-medium text-muted mb-1 font-sans">Gap score</label>
+                <input type="number" min="0" max="10" value={gapScore} onChange={e => setGapScore(e.target.value)} className={`${INPUT_CLS} font-mono`} />
               </div>
               <div>
-                <label className="block text-sm font-medium text-brand-navy mb-1">Date</label>
+                <label className="block text-sm font-medium text-muted mb-1 font-sans">Date</label>
                 <input type="date" value={date} onChange={e => setDate(e.target.value)} className={INPUT_CLS} />
               </div>
             </div>
 
             <button
               onClick={handleSave}
-              className="mt-6 w-full bg-brand-teal text-white rounded-full py-3 font-semibold hover:bg-teal-400 transition-colors"
+              className="mt-6 w-full bg-accent text-bg rounded-lg py-3 font-sans font-semibold hover:bg-accent/90 transition-colors"
             >
-              Save Expense
+              Save Pattern
             </button>
             <button
               onClick={() => setModalOpen(false)}
-              className="mt-3 w-full text-gray-400 text-sm text-center hover:text-gray-600 transition-colors"
+              className="mt-3 w-full font-sans text-muted text-sm text-center hover:text-text transition-colors"
             >
               Cancel
             </button>
@@ -192,8 +189,8 @@ export default function ExpensesPage() {
 
       {/* Toast */}
       {toast && (
-        <div className="fixed bottom-6 right-6 bg-brand-navy text-white px-6 py-3 rounded-full shadow-lg text-sm font-medium z-50">
-          Expense saved!
+        <div className="fixed bottom-6 right-6 bg-card border border-border text-text px-6 py-3 rounded-lg shadow-lg font-sans text-sm font-medium z-50">
+          Pattern logged.
         </div>
       )}
     </div>

@@ -9,15 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          navy: '#1A1A2E',
-          teal: '#00D8A4',
-          surface: '#F8F7F4',
-        },
+        bg:        '#0D0F1A',
+        card:      '#13162A',
+        text:      '#F5F0E8',
+        muted:     '#9B9690',
+        accent:    '#C9913D',
+        secondary: '#4A6B5E',
+        urgent:    '#D4521A',
+        border:    '#2A2D40',
       },
       fontFamily: {
-        display: ['Sora', 'sans-serif'],
-        body: ['DM Sans', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
+        sans:  ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono:  ['var(--font-dm-mono)', 'Menlo', 'monospace'],
       },
     },
   },

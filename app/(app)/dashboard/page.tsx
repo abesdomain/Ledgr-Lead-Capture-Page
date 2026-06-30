@@ -5,29 +5,30 @@ import Link from 'next/link';
 import { useUser } from '@/lib/auth/UserContext';
 
 const STATS = [
-  { value: '$24,850', label: 'Total Invoiced',    sublabel: 'This month' },
-  { value: '$19,200', label: 'Collected',          sublabel: 'Payments received' },
-  { value: '$5,650',  label: 'Outstanding',        sublabel: 'Awaiting payment' },
-  { value: '8 days',  label: 'Avg. Payment Time', sublabel: 'Per invoice' },
+  { value: '78',              label: 'Clarity Score',  sublabel: 'Internal precision',   mono: true },
+  { value: '45',              label: 'Signal Score',   sublabel: 'Expressed strength',   mono: true },
+  { value: '33',              label: 'Gap',            sublabel: 'Clarity minus signal',  mono: true },
+  { value: 'Chronic DA',      label: 'Pattern Label',  sublabel: 'Primary pattern type', mono: false },
 ];
 
-type Status = 'Paid' | 'Pending' | 'Overdue';
+type Pattern = 'Aligned' | 'Deferred' | 'Selective' | 'Situational';
 
-const STATUS_STYLES: Record<Status, string> = {
-  Paid:    'bg-green-100 text-green-700',
-  Pending: 'bg-yellow-100 text-yellow-700',
-  Overdue: 'bg-red-100 text-red-700',
+const PATTERN_STYLES: Record<Pattern, string> = {
+  Aligned:     'bg-secondary/20 text-secondary',
+  Deferred:    'bg-muted/20 text-muted',
+  Selective:   'bg-accent/20 text-accent',
+  Situational: 'bg-border/60 text-muted',
 };
 
-const INVOICES: { id: string; client: string; amount: string; status: Status; date: string }[] = [
-  { id: 'INV-0041', client: 'Bright Media Co.',  amount: '$3,200', status: 'Paid',    date: 'Jun 1, 2026' },
-  { id: 'INV-0040', client: 'Torres & Sons LLC', amount: '$1,850', status: 'Pending', date: 'May 28, 2026' },
-  { id: 'INV-0039', client: 'Vega Consulting',   amount: '$4,500', status: 'Paid',    date: 'May 22, 2026' },
-  { id: 'INV-0038', client: 'NorthEdge Studio',  amount: '$2,100', status: 'Overdue', date: 'May 15, 2026' },
-  { id: 'INV-0037', client: 'Bright Media Co.',  amount: '$3,200', status: 'Paid',    date: 'May 10, 2026' },
+const SESSIONS: { id: string; participant: string; focusArea: string; score: string; pattern: Pattern; date: string }[] = [
+  { id: 'SES-0041', participant: 'A. Okafor',     focusArea: 'Leadership visibility',    score: '62', pattern: 'Deferred',    date: 'Jun 1, 2026'  },
+  { id: 'SES-0040', participant: 'M. Torres',     focusArea: 'Peer authority dynamics',  score: '74', pattern: 'Selective',   date: 'May 28, 2026' },
+  { id: 'SES-0039', participant: 'R. Mensah',     focusArea: 'Boardroom signal timing',  score: '81', pattern: 'Aligned',     date: 'May 22, 2026' },
+  { id: 'SES-0038', participant: 'J. Whitfield',  focusArea: 'Cross-team influence',     score: '55', pattern: 'Situational', date: 'May 15, 2026' },
+  { id: 'SES-0037', participant: 'A. Okafor',     focusArea: 'Client-facing authority',  score: '68', pattern: 'Deferred',    date: 'May 10, 2026' },
 ];
 
-const SHIMMER = 'bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse rounded-lg';
+const SHIMMER = 'bg-border/50 animate-pulse rounded-lg';
 
 export default function DashboardPage() {
   const { user } = useUser();
@@ -43,18 +44,18 @@ export default function DashboardPage() {
     <div className="page-fade-in max-w-6xl mx-auto px-6 py-8">
       {/* Greeting */}
       <div>
-        <h1 className="font-display text-2xl font-bold text-brand-navy">
+        <h1 className="font-sans text-2xl font-bold text-text">
           Good morning, {displayName}
         </h1>
-        <p className="font-display text-gray-500 mt-1">
-          Here&apos;s your financial snapshot for June 2026
+        <p className="font-sans text-muted mt-1">
+          Here&apos;s your signal snapshot
         </p>
       </div>
 
       {/* Stats row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-        {STATS.map(({ value, label, sublabel }) => (
-          <div key={label} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        {STATS.map(({ value, label, sublabel, mono }) => (
+          <div key={label} className="bg-card rounded-xl p-6 border border-border">
             {!statsReady ? (
               <>
                 <div className={`h-9 w-24 mb-2 ${SHIMMER}`} />
@@ -63,48 +64,48 @@ export default function DashboardPage() {
               </>
             ) : (
               <>
-                <p className="font-display text-3xl font-bold text-brand-navy">{value}</p>
-                <p className="text-gray-500 text-sm mt-1">{label}</p>
-                <p className="text-gray-400 text-xs mt-0.5">{sublabel}</p>
+                <p className={`text-3xl font-bold text-accent ${mono ? 'font-mono' : 'font-sans'}`}>{value}</p>
+                <p className="font-sans text-text text-sm mt-1">{label}</p>
+                <p className="font-sans text-muted text-xs mt-0.5">{sublabel}</p>
               </>
             )}
           </div>
         ))}
       </div>
 
-      {/* Recent invoices */}
+      {/* Recent audit sessions */}
       <div className="mt-10">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-display font-semibold text-xl text-brand-navy">Recent Invoices</h2>
-          <Link href="/invoices" className="text-brand-teal text-sm hover:underline">
+          <h2 className="font-sans font-semibold text-xl text-text">Recent Audit Sessions</h2>
+          <Link href="/invoices" className="font-sans text-accent text-sm hover:underline">
             View all
           </Link>
         </div>
 
         {/* Desktop table */}
-        <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="hidden md:block bg-card rounded-xl border border-border overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="bg-gray-50">
-                {['Invoice #', 'Client', 'Amount', 'Status', 'Date'].map(col => (
-                  <th key={col} className="text-left px-6 py-3 text-gray-500 text-xs uppercase tracking-wide font-medium">
+              <tr className="border-b border-border">
+                {['Session', 'Participant', 'Score', 'Pattern', 'Date'].map(col => (
+                  <th key={col} className="text-left px-6 py-3 font-sans text-muted text-xs uppercase tracking-wide font-medium">
                     {col}
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {INVOICES.map(({ id, client, amount, status, date }) => (
-                <tr key={id} className="border-t border-gray-50 hover:bg-gray-50/50 transition-colors">
-                  <td className="px-6 py-4 text-sm font-medium text-brand-navy">{id}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{client}</td>
-                  <td className="px-6 py-4 text-sm font-medium text-brand-navy">{amount}</td>
+              {SESSIONS.map(({ id, participant, score, pattern, date }) => (
+                <tr key={id} className="border-t border-border/50 hover:bg-border/20 transition-colors">
+                  <td className="px-6 py-4 font-sans text-sm font-medium text-text font-mono">{id}</td>
+                  <td className="px-6 py-4 font-sans text-sm text-muted">{participant}</td>
+                  <td className="px-6 py-4 font-mono text-sm font-medium text-accent">{score}</td>
                   <td className="px-6 py-4">
-                    <span className={`rounded-full px-3 py-1 text-xs font-medium ${STATUS_STYLES[status]}`}>
-                      {status}
+                    <span className={`rounded-full px-3 py-1 text-xs font-medium font-sans ${PATTERN_STYLES[pattern]}`}>
+                      {pattern}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{date}</td>
+                  <td className="px-6 py-4 font-sans text-sm text-muted">{date}</td>
                 </tr>
               ))}
             </tbody>
@@ -113,39 +114,39 @@ export default function DashboardPage() {
 
         {/* Mobile card list */}
         <div className="md:hidden flex flex-col gap-3">
-          {INVOICES.map(({ id, client, amount, status, date }) => (
-            <div key={id} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          {SESSIONS.map(({ id, participant, score, pattern, date }) => (
+            <div key={id} className="bg-card rounded-xl p-4 border border-border">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-brand-navy">{id}</p>
-                  <p className="text-sm text-gray-500 mt-0.5">{client}</p>
+                  <p className="font-mono text-sm font-semibold text-text">{id}</p>
+                  <p className="font-sans text-sm text-muted mt-0.5">{participant}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-brand-navy">{amount}</p>
-                  <span className={`inline-block mt-1 rounded-full px-3 py-0.5 text-xs font-medium ${STATUS_STYLES[status]}`}>
-                    {status}
+                  <p className="font-mono text-sm font-semibold text-accent">{score}</p>
+                  <span className={`inline-block mt-1 rounded-full px-3 py-0.5 text-xs font-medium font-sans ${PATTERN_STYLES[pattern]}`}>
+                    {pattern}
                   </span>
                 </div>
               </div>
-              <p className="text-gray-400 text-xs mt-2">{date}</p>
+              <p className="font-sans text-muted text-xs mt-2">{date}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Quick actions */}
-      <div className="mt-8 flex gap-4">
+      <div className="mt-8 flex gap-4 flex-wrap">
         <Link
           href="/invoices"
-          className="bg-brand-teal text-white rounded-full px-6 py-3 font-semibold hover:bg-teal-400 transition-colors"
+          className="bg-accent text-bg rounded-lg px-6 py-3 font-sans font-semibold hover:bg-accent/90 transition-colors"
         >
-          New Invoice
+          New Session
         </Link>
         <Link
           href="/expenses"
-          className="bg-white text-brand-navy border border-gray-200 rounded-full px-6 py-3 font-semibold hover:bg-gray-50 transition-colors"
+          className="bg-card text-text border border-border rounded-lg px-6 py-3 font-sans font-semibold hover:bg-border/40 transition-colors"
         >
-          Log Expense
+          Log Pattern
         </Link>
       </div>
     </div>

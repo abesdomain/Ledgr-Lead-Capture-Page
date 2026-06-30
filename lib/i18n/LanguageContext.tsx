@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { translations, type Language } from './strings';
 
-const STORAGE_KEY = 'ledgr-lang';
+const STORAGE_KEY = 'da-lang';
 
 function detectInitialLanguage(): Language {
   if (typeof window === 'undefined') return 'en';

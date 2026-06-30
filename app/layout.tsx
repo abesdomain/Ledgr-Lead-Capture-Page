@@ -1,23 +1,30 @@
 import type { Metadata } from "next";
-import { Sora, DM_Sans } from "next/font/google";
+import { Playfair_Display, Inter, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const sora = Sora({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-sora",
+  variable: "--font-playfair",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  variable: "--font-dm-mono",
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Ledgr",
-  description: "Ledgr Lead Capture",
+  title: "Deferred Authority",
+  description: "Correcting the timing of your signal.",
 };
 
 export default function RootLayout({
@@ -28,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${sora.variable} ${dmSans.variable} bg-brand-surface text-brand-navy antialiased`}
+        className={`${playfair.variable} ${inter.variable} ${dmMono.variable} font-sans bg-bg text-text antialiased`}
       >
         <Providers>{children}</Providers>
       </body>

@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 
-const STORAGE_KEY = 'ledgr-user';
+const STORAGE_KEY = 'da-user';
 
 interface User {
   id: string;

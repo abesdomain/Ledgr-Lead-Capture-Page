@@ -1,6 +1,6 @@
-# Ledgr Landing Page
+# Deferred Authority
 
-Bilingual (EN/ES) Next.js 14 static landing page for Ledgr, deployed to Cloudflare Pages.
+Bilingual (EN/ES) Next.js 14 static landing page for Deferred Authority, deployed to Cloudflare Pages.
 
 ## Local development
 

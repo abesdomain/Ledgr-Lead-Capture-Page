@@ -8,7 +8,7 @@ export default function LoginPage() {
   const { user, login } = useUser();
   const router = useRouter();
 
-  const [email, setEmail] = useState('demo@ledgr.app');
+  const [email, setEmail] = useState('demo@deferredauthority.com');
   const [password, setPassword] = useState('demo1234');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -31,25 +31,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-navy flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-10">
+    <div className="min-h-screen bg-bg flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-card rounded-2xl border border-border shadow-xl p-10">
         {/* Wordmark */}
         <div className="mb-8">
-          <span className="font-display font-bold text-xl text-brand-navy select-none">
-            Ledgr
-            <span
-              className="inline-block w-1.5 h-1.5 rounded-sm bg-brand-teal ml-0.5 mb-1 align-middle"
-              aria-hidden="true"
-            />
+          <span className="font-serif font-bold text-xl text-text select-none">
+            Deferred Authority
           </span>
         </div>
 
-        <h1 className="font-display text-2xl font-bold text-brand-navy">Welcome back</h1>
-        <p className="text-gray-500 text-sm mt-1">Sign in to your Ledgr account</p>
+        <h1 className="font-serif text-2xl font-bold text-text">Welcome back</h1>
+        <p className="font-sans text-muted text-sm mt-1">Sign in to your Deferred Authority account</p>
 
         <form onSubmit={handleSubmit} noValidate className="mt-8 flex flex-col gap-4">
           <div>
-            <label className="block text-sm font-medium text-brand-navy mb-1" htmlFor="login-email">
+            <label className="block text-sm font-sans font-medium text-muted mb-1" htmlFor="login-email">
               Email
             </label>
             <input
@@ -57,12 +53,12 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-brand-navy focus:outline-none focus:border-brand-teal"
+              className="w-full border border-border bg-bg rounded-lg px-4 py-3 text-text focus:outline-none focus:border-accent font-sans"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-brand-navy mb-1" htmlFor="login-password">
+            <label className="block text-sm font-sans font-medium text-muted mb-1" htmlFor="login-password">
               Password
             </label>
             <input
@@ -70,16 +66,16 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-brand-navy focus:outline-none focus:border-brand-teal"
+              className="w-full border border-border bg-bg rounded-lg px-4 py-3 text-text focus:outline-none focus:border-accent font-sans"
             />
           </div>
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-urgent text-sm">{error}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className={`bg-brand-teal text-white rounded-full w-full py-3 font-semibold mt-2 hover:bg-teal-400 transition-colors ${
+            className={`bg-accent text-bg rounded-lg w-full py-3 font-sans font-semibold mt-2 hover:bg-accent/90 transition-colors ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
@@ -93,8 +89,8 @@ export default function LoginPage() {
                   fill="none"
                   aria-hidden="true"
                 >
-                  <circle cx="10" cy="10" r="8" stroke="white" strokeWidth="2" strokeOpacity="0.3" />
-                  <path d="M10 2a8 8 0 0 1 8 8" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="10" cy="10" r="8" stroke="#0D0F1A" strokeWidth="2" strokeOpacity="0.3" />
+                  <path d="M10 2a8 8 0 0 1 8 8" stroke="#0D0F1A" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </span>
             ) : (
@@ -102,8 +98,8 @@ export default function LoginPage() {
             )}
           </button>
 
-          <p className="text-gray-400 text-xs text-center mt-4">
-            Use demo@ledgr.app / demo1234 to sign in
+          <p className="font-sans text-muted/60 text-xs text-center mt-4">
+            Use demo@deferredauthority.com / demo1234 to sign in
           </p>
         </form>
       </div>
