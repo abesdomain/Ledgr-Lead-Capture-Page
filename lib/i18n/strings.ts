@@ -5,12 +5,12 @@ export const translations: Record<Language, Record<string, string>> = {
     // Hero
     'hero.headline': "You don't have a confidence problem. You have a timing problem.",
     'hero.subheadline':
-      "I help faith-driven professionals who've confused invisibility with humility stop deferring the authority God already gave them — not by becoming someone louder, but by correcting the timing of their signal.",
+      "For people who've prayed about this more than once, and still feel the gap between what they're convicted to do and what they actually say out loud.",
     'hero.cta': 'Apply for the Founding Cohort',
 
     // Features
-    'features.heading': 'For faith-driven professionals who are accurate but overlooked',
-    'features.subheading': 'Trusted informally, never chosen formally. The Signal Audit is built to surface and correct this pattern.',
+    'features.heading': 'For people discerning whether staying quiet was ever really humility.',
+    'features.subheading': 'Trusted informally, never chosen formally. The Signal Audit is built to surface what the gap actually is — and correct it.',
     'features.invoicing.title': 'The Signal Audit',
     'features.invoicing.body':
       'A diagnostic that measures the gap between your internal clarity and how fully you say it out loud. Know exactly where your signal breaks down.',
@@ -136,12 +136,12 @@ export const translations: Record<Language, Record<string, string>> = {
     // Hero
     'hero.headline': 'No tienes un problema de confianza. Tienes un problema de timing.',
     'hero.subheadline':
-      'Ayudo a profesionales con fe que han confundido la invisibilidad con humildad a dejar de diferir la autoridad que Dios ya les dio — no volviéndose más ruidosos, sino corrigiendo el momento de su señal.',
+      'Para las personas que han orado sobre esto más de una vez, y que aún sienten la brecha entre lo que sienten convicción de hacer y lo que realmente dicen en voz alta.',
     'hero.cta': 'Aplicar al cohorte fundador',
 
     // Features
-    'features.heading': 'Para profesionales con fe que son precisos pero ignorados',
-    'features.subheading': 'Confiados informalmente, nunca elegidos formalmente. La Auditoría de Señal está diseñada para identificar y corregir este patrón.',
+    'features.heading': 'Para las personas que están discerniendo si quedarse callados fue alguna vez realmente humildad.',
+    'features.subheading': 'Confiados informalmente, nunca elegidos formalmente. La Auditoría de Señal identifica cuál es realmente la brecha — y la corrige.',
     'features.invoicing.title': 'La Auditoría de Señal',
     'features.invoicing.body':
       'Un diagnóstico que mide la brecha entre tu claridad interna y qué tan completamente la expresas. Entiende exactamente dónde se interrumpe tu señal.',
