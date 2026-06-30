@@ -425,7 +425,7 @@ export default function AuditPage() {
                   You&apos;re in.
                 </h3>
                 <p className="font-sans text-muted text-sm leading-[1.68]">
-                  Check your inbox. The breakdown is on its way.
+                  I read every submission personally. If you&apos;re a fit for the founding cohort, I&apos;ll reach out directly.
                 </p>
               </div>
             ) : (
